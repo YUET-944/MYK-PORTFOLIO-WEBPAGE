@@ -1,0 +1,51 @@
+Muhammad Younas Khan
+Swat, Pakistan | +923155705944 | mykjcs2023@gmail.com
+LinkedIn:   https://linkedin.com/in/muhammad-younas-khan-72b102264   |   GitHub:   https://github.com/YUET-944
+
+Summary
+Motivated and detail-oriented Computer Science student with strong problem-solving skills and hands-on
+experience in programming, database management, and software development. Proficient in C++, SQL, and
+Python, with a growing skill set in Flutter and web technologies. Skilled in creating academic and personal
+projects, passionate about building real-world applications, and adept at working in teams with a focus on
+DSA and OOP.
+
+Projects
+KFT Social Welfare Organization Webpage (HTML/CSS/JS): Created a responsive, user-friendly
+website for KFT, focusing on clean design, mobile responsiveness, and intuitive navigation.
+Personal Portfolio Website (HTML/CSS/JS/React): Developed a sleek, modern website to showcase
+personal projects, skills, and accomplishments for potential employers.
+Pharmacy Management System (Python + MySQL): Created a full-stack database application for
+managing pharmacy inventory, sales, and customer data.
+Job Portal (SQL Backend Development): Created a relational database backend for job listings,
+applications, and user profiles.
+Sliding Window & Linked List Operations Toolkit (C++): Developed an optimized toolkit
+implementing sliding window techniques and data structure operations.
+Hostel Management System (C++): Created an object-oriented application for managing hostel
+room allocations and student data.
+ATM System (OOP-Based in C++): Developed an interactive ATM simulation focusing on OOP
+concepts.
+Student Admission Data Management System (C): Created a structured program for managing
+student records and admission data.
+
+Skills
+Programming: C++, Python (basic), HTML, CSS, JavaScript
+Database Management: MySQL, SQL Queries, Schema Design
+Web Development: HTML, CSS, JavaScript, React (learning)
+Certifications: Introduction to Computers and Operating Systems and Security, Microsoft (via
+Coursera) – April 2025
+
+Education
+Bachelor of Science, BSc CS, 2027
+University of Engineering and Technology, Mardan, KP
+• Studying core subjects including programming, algorithms, databases, and web/app development, with
+  hands-on experience through labs and projects.
+
+ICS, 2023
+Govt. Post Graduate Jahanzeb College, Swat
+• Studied core subjects including Computer Science, Mathematics, and Physics with a strong focus on
+  programming fundamentals and problem-solving.
+
+Languages
+Urdu: B2 (Upper Intermediate)
+English: B1 (Intermediate)
+Pashto: C1 (Advanced)
