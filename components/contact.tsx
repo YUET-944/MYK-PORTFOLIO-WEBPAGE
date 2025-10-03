@@ -1,12 +1,13 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, Github, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react"
-import { sendContactEmail } from "@/app/actions/contact"
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -47,21 +48,35 @@ export function Contact() {
     },
   ]
 
-  const handleSubmit = async (formData: FormData) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setIsSubmitting(true)
     setError(null)
+    const form = e.currentTarget
+    const formData = new FormData(form)
 
     try {
-      const result = await sendContactEmail(formData)
-      if (!result?.success) {
-        throw new Error(result?.message || "Email service not configured.")
+      const res = await fetch("https://formspree.io/f/xldwrvwd", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      })
+
+      if (!res.ok) {
+        let message = "Oops! There was a problem submitting your form"
+        try {
+          const data = await res.json()
+          if (data?.errors) {
+            message = data.errors.map((err: { message: string }) => err.message).join(", ")
+          }
+        } catch {}
+        throw new Error(message)
       }
+
       setIsSubmitted(true)
-    } catch (error) {
-      console.error("Error sending email:", error)
-      setError(
-        error instanceof Error ? error.message : "Failed to send message. Please check your connection or try later.",
-      )
+      form.reset()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send message. Please try again later.")
     } finally {
       setIsSubmitting(false)
     }
@@ -161,7 +176,7 @@ export function Contact() {
                       </div>
                     )}
 
-                    <form action={handleSubmit} className="space-y-4">
+                    <form onSubmit={onSubmitForm} encType="multipart/form-data" className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="text-white text-sm font-medium mb-2 block">
@@ -225,6 +240,16 @@ export function Contact() {
                           disabled={isSubmitting}
                           className="bg-slate-900/50 border-slate-600/50 text-white placeholder:text-gray-400 focus:border-indigo-400 disabled:opacity-50 resize-none"
                         />
+                      </div>
+                      <div>
+                        <label className="text-white text-sm font-medium mb-2 block">Attachment (optional)</label>
+                        <Input
+                          type="file"
+                          name="upload"
+                          disabled={isSubmitting}
+                          className="bg-slate-900/50 border-slate-600/50 text-white file:text-white file:bg-slate-800 file:border-0"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">PDF or image files recommended.</p>
                       </div>
                       <Button
                         type="submit"

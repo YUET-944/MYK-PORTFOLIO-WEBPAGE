@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     canonical: "https://myk-portfolio-website.vercel.app",
   },
   category: "Portfolio",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -119,7 +119,7 @@ export default function RootLayout({
           `}
         </script>
       </head>
-      <body className="font-inter antialiased">
+      <body className="font-poppins antialiased">
         <div id="root">{children}</div>
       </body>
     </html>

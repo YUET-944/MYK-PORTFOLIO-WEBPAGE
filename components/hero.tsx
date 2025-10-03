@@ -2,16 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ExternalLink, MapPin } from "lucide-react"
-import { Download } from "@/components/animated-download"
+import { Github, Linkedin, Mail, ExternalLink, Download, MapPin } from "lucide-react"
 
 export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0)
   const roles = [
     "Aspiring Full Stack Developer",
-    "Web Developer", // Changed from "Python Developer"
+    "Flutter & Mobile App Developer",
     "Database Designer",
-    // Removed "Flutter & Mobile App Developer"
+    "Python Developer",
   ]
 
   useEffect(() => {
@@ -22,10 +21,10 @@ export default function Hero() {
   }, [])
 
   const handleDownloadCV = () => {
-    // Create a link to download the PDF CV
+    // Create a link to download the CV
     const link = document.createElement("a")
-    link.href = "/Muhammad_Younas_Khan_CV.pdf"
-    link.download = "Muhammad_Younas_Khan_CV.pdf"
+    link.href = "/Muhammad_Younas_Khan_CV.txt"
+    link.download = "Muhammad_Younas_Khan_CV.txt"
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -69,12 +68,12 @@ export default function Hero() {
             {/* Enhanced Introduction */}
             <div className="max-w-3xl mx-auto mb-6">
               <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed">
-                💼 <strong className="text-white">Passionate about Web Development, Python & Databases</strong>
+                💼 <strong className="text-white">Passionate about Flutter, Python & Databases</strong>
               </p>
               <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                 Hi! I'm Muhammad Younas Khan, a Computer Science student at UET Mardan. I build efficient, user-focused
-                web applications using modern technologies, SQL, and Python. Currently leading a social media MVP
-                development team and exploring the latest in full-stack development.
+                web and mobile apps using Flutter, SQL, and Python. Currently leading a social media MVP development
+                team and exploring the latest in full-stack development.
               </p>
             </div>
 
@@ -100,8 +99,8 @@ export default function Hero() {
               className="border-indigo-400/50 text-indigo-400 hover:bg-indigo-400/10 backdrop-blur-sm hover:scale-105 transition-all duration-300 group bg-transparent"
               onClick={handleDownloadCV}
             >
-              <Download width={16} height={16} stroke="#6366f1" />
-              <span className="ml-2">Download Resume</span>
+              <Download className="h-4 w-4 mr-2 group-hover:bounce transition-all" />
+              Download Resume
             </Button>
             <Button
               variant="outline"
@@ -149,7 +148,7 @@ export default function Hero() {
             <p className="text-gray-400 text-sm mb-2">Live GitHub Activity</p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm">
               <span className="text-indigo-400 animate-pulse">🔥 Active Developer</span>
-              <span className="text-emerald-400 animate-pulse delay-300">📚 Learning Web Development</span>
+              <span className="text-emerald-400 animate-pulse delay-300">📚 Learning Flutter</span>
               <span className="text-purple-400 animate-pulse delay-700">🚀 Building Projects</span>
               <span className="text-yellow-400 animate-pulse delay-1000">👥 Team Leader</span>
             </div>

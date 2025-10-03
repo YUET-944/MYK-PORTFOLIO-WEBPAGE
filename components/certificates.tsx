@@ -7,26 +7,45 @@ import { Award, Calendar, ExternalLink, Eye } from "lucide-react"
 import { useState } from "react"
 
 export function Certificates() {
-  const [showCertificate, setShowCertificate] = useState(false)
+  const [viewer, setViewer] = useState<{ title: string; image: string; verify?: string } | null>(null)
 
   const certifications = [
     {
-      name: "Introduction to Computers and Operating Systems and Security",
+      name: "Introduction to Computers, OS, and Security",
       status: "Completed",
       provider: "Microsoft (via Coursera)",
       description: "Comprehensive course covering computer fundamentals, operating systems, and security principles.",
       date: "April 18, 2025",
       verificationUrl: "https://coursera.org/verify/FSUOSYPRKQ94",
-      certificateImage: "/microsoft-certificate.png", // Corrected to .jpg
+      certificateImage: "/certificates/coursera-microsoft.png",
       gradient: "from-blue-400 to-blue-600",
     },
     {
-      name: "Microsoft SC-900: Security, Compliance, and Identity Fundamentals",
-      status: "In Progress",
-      provider: "Microsoft",
-      description: "Learning cloud security, compliance, and identity management fundamentals.",
-      date: "2024",
-      gradient: "from-green-400 to-green-600",
+      name: "CodeAlpha – Letter of Recommendation",
+      status: "Completed",
+      provider: "CodeAlpha",
+      description: "Letter of Recommendation recognizing performance during the Frontend Development internship.",
+      date: "Sept 21, 2025",
+      certificateImage: "/certificates/codealpha-letter.png",
+      gradient: "from-amber-400 to-yellow-500",
+    },
+    {
+      name: "CodeAlpha – Internship Certificate",
+      status: "Completed",
+      provider: "CodeAlpha",
+      description: "Certificate of completion for the Frontend Development Virtual Internship Program.",
+      date: "Sept 21, 2025",
+      certificateImage: "/certificates/codealpha-internship.png",
+      gradient: "from-emerald-400 to-emerald-600",
+    },
+    {
+      name: "Logic Loomer – Frontend Internship (React)",
+      status: "Completed",
+      provider: "Logic Loomer",
+      description: "Certificate acknowledging successful completion of the Frontend Internship in React.",
+      date: "Aug 29, 2025",
+      certificateImage: "/certificates/logic-loomer-internship.png",
+      gradient: "from-indigo-400 to-indigo-600",
     },
   ]
 
@@ -116,7 +135,9 @@ export function Certificates() {
                         <Button
                           size="sm"
                           className="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 border-0"
-                          onClick={() => setShowCertificate(true)}
+                          onClick={() =>
+                            setViewer({ title: cert.name, image: cert.certificateImage, verify: cert.verificationUrl })
+                          }
                         >
                           <Eye className="h-4 w-4 mr-2" />
                           View Certificate
@@ -180,15 +201,15 @@ export function Certificates() {
         </div>
 
         {/* Certificate Modal */}
-        {showCertificate && (
+        {viewer && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6 max-w-4xl w-full max-h-[90vh] overflow-auto">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6 max-w-5xl w-full max-h-[90vh] overflow-auto">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-white font-['Poppins']">Microsoft Certificate</h3>
+                <h3 className="text-xl font-semibold text-white font-['Poppins']">{viewer.title}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setShowCertificate(false)}
+                  onClick={() => setViewer(null)}
                   className="text-white hover:bg-white/10"
                 >
                   ✕
@@ -196,20 +217,22 @@ export function Certificates() {
               </div>
               <div className="bg-white rounded-lg p-2">
                 <img
-                  src="/microsoft-certificate.png" // Corrected to .jpg
-                  alt="Microsoft Certificate - Introduction to Computers and Operating Systems and Security"
+                  src={viewer.image || "/placeholder.svg"}
+                  alt={`${viewer.title} certificate`}
                   className="w-full h-auto rounded"
                 />
               </div>
-              <div className="mt-4 text-center">
-                <Button
-                  className="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 border-0"
-                  onClick={() => window.open("https://coursera.org/verify/FSUOSYPRKQ94", "_blank")}
-                >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Verify on Coursera
-                </Button>
-              </div>
+              {viewer.verify && (
+                <div className="mt-4 text-center">
+                  <Button
+                    className="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 border-0"
+                    onClick={() => window.open(viewer.verify!, "_blank")}
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Verify
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}

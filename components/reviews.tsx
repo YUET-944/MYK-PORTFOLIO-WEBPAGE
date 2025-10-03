@@ -39,49 +39,15 @@ export function Reviews() {
         const newReview = {
           name: name,
           role: role,
-          company: company || "",
+          company: company,
           rating: rating,
           review: review,
-          date: new Date(timestamp).getFullYear().toString(),
-          avatar: "👤",
-          timestamp: timestamp,
+          date: new Date(timestamp).getFullYear().toString(), // Use timestamp directly
+          avatar: "👤", // Default avatar
         }
-
-        // Add to local state
         setReviews((prevReviews) => [newReview, ...prevReviews])
         setReviewCount((prevCount) => prevCount + 1)
-
-        // Store in localStorage for persistence
-        const existingReviews = JSON.parse(localStorage.getItem("portfolioReviews") || "[]")
-        const updatedReviews = [newReview, ...existingReviews]
-        localStorage.setItem("portfolioReviews", JSON.stringify(updatedReviews))
-
-        // Dispatch custom event to update testimonials section
-        const event = new CustomEvent("newReview", {
-          detail: {
-            name: newReview.name,
-            role: newReview.role,
-            company: newReview.company,
-            review: newReview.review,
-            rating: newReview.rating,
-            timestamp: newReview.timestamp,
-          },
-        })
-        window.dispatchEvent(event)
-
         setIsSubmitted(true)
-
-        // Reset form after showing success message
-        setTimeout(() => {
-          setIsSubmitted(false)
-          setRating(0)
-          setError(null)
-          // Reset form fields
-          const form = document.querySelector("form") as HTMLFormElement
-          if (form) {
-            form.reset()
-          }
-        }, 3000)
       } else {
         throw new Error(result.message || "Failed to submit review")
       }
@@ -105,17 +71,17 @@ export function Reviews() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 font-['Poppins']">Reviews & Feedback</h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Share your experience working with me - your review will appear in the "What People Say" section above
+            What people say about working with me, and share your own experience
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Recent Reviews Display */}
+          {/* Existing Reviews */}
           <div>
             <h3 className="text-2xl font-semibold text-white mb-6 font-['Poppins'] flex items-center">
-              Recent Reviews ({reviewCount})
+              Client Reviews ({reviewCount})
             </h3>
-            <div className="space-y-6 max-h-96 overflow-y-auto">
+            <div className="space-y-6">
               {reviews.length === 0 ? (
                 <Card className="bg-white/5 backdrop-blur-lg border-white/10">
                   <CardContent className="p-6 text-center text-gray-400">
@@ -153,13 +119,6 @@ export function Reviews() {
                 ))
               )}
             </div>
-            {reviews.length > 0 && (
-              <div className="mt-4 text-center">
-                <p className="text-gray-400 text-sm">
-                  ✨ Your reviews also appear in the "What People Say" slideshow above
-                </p>
-              </div>
-            )}
           </div>
 
           {/* Review Submission Form */}
@@ -180,11 +139,15 @@ export function Reviews() {
                     <CheckCircle className="h-16 w-16 text-emerald-400 mx-auto mb-4" />
                     <h3 className="text-xl font-semibold text-white mb-2 font-['Poppins']">Review Submitted!</h3>
                     <p className="text-gray-400 mb-4">
-                      Thank you for your feedback. Your review is now featured in the testimonials slideshow!
+                      Thank you for your feedback. It will be reviewed and published soon!
                     </p>
-                    <div className="text-sm text-indigo-400">
-                      <p>🎉 Check the "What People Say" section above to see your review</p>
-                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={resetForm}
+                      className="border-indigo-400/50 text-indigo-400 hover:bg-indigo-400/10 bg-transparent"
+                    >
+                      Submit Another Review
+                    </Button>
                   </div>
                 ) : (
                   <>
